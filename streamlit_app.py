@@ -1,10 +1,14 @@
 import streamlit as st
 import pandas as pd
-upload_file = st.file_uploader('解析したいcsvファイルをアップロードしてください.')
 
 # icon設定
 st.set_page_config(page_title='ozro_wepapp',
                     page_icon='clubhouse-icon.png')
+
+st.title('Data Visualization')
+
+upload_file = st.file_uploader('解析したいcsvファイルをアップロードしてください.')
+
 
 
 if upload_file is not None:
