@@ -18,7 +18,7 @@ if upload_file is not None:
 
     unuse_cols = st.multiselect(
         '解析不要な列があれば選択してください.',
-        list(len(df.columns))
+        list(range(df.columns))
     )
     if len(unuse_cols)==0:
         st.error('解析する列がありません.')
