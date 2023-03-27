@@ -5,8 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import shap
 
-from preprocess import Preprocess
-
+from src.preprocess import Preprocess
+from src.shap_plot import ShapPlot
 
 # icon設定
 st.set_page_config(page_title='ozro_wepapp',
@@ -14,21 +14,27 @@ st.set_page_config(page_title='ozro_wepapp',
 
 st.title('Explanation of GBDT prediction using SHAP')
 
+st.markdown('* * *')
+st.markdown('## Please Upload Model and Train data')
+
 upload_model_file = st.file_uploader('Please Upload Model(pickle file) here.', type='pkl')
+st.markdown('* * *')
 upload_train_file = st.file_uploader('Please Upload data file used to train the model (csv file).', type='csv')
+st.markdown('* * *')
+
+@st.cache_data
+def load_data(upload_model_file, upload_train_file):
+    model = pd.read_pickle(upload_model_file)
+    train = pd.read_csv(upload_train_file)
+    return model, train
 
 
 if (upload_model_file is not None) and (upload_train_file is not None):
-    model = pd.read_pickle(upload_model_file)
-    train = pd.read_csv(upload_train_file)
+    model, train = load_data(upload_model_file, upload_train_file)
 
-    explainer = shap.TreeExplainer(model, data=train)
-    shap_val = explainer.shap_values(train)
-    fig, ax = plt.subplots()
-    shap.summary_plot(shap_values=shap_val,
-                    features=train,
-                    feature_names=train.columns)
-    st.pyplot(fig)
+    st.session_state['model'] = model
+    st.session_state['train'] = train
+
 
     #unuse_cols = st.multiselect(
     #    '解析不要な列があれば選択してください.',
