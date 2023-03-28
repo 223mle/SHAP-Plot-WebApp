@@ -35,6 +35,14 @@ class ShapPlot:
         shap.plots.waterfall(shap_vals[num])
         return fig
 
+    #def force_plot(self):
+    #    explainer = shap.TreeExplainer(self.model,
+    #    data=self.train)
+    #    shap_vals = explainer.shap_values(self.train)
+    #    fig, ax = plt.subplots()
+    #    train = self.train[:1000]
+    #    shap.force_plot(base_value=explainer.expected_value,
+    #    shap_values=shap_vals, features=train, feature_names=train.columns)
 
 
     #def dependence_plot(self, column: str):

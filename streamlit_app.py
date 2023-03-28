@@ -35,6 +35,7 @@ if (upload_model_file is not None) and (upload_train_file is not None):
     st.session_state['model'] = model
     st.session_state['train'] = train
 
+    st.success('Now that the upload is complete, please go to the page you want to see from the page column on the left side.')
 
     #unuse_cols = st.multiselect(
     #    '解析不要な列があれば選択してください.',
