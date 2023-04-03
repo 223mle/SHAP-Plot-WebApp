@@ -3,3 +3,4 @@
 .streamlit
 __pycache__
 archive
+.vscode
